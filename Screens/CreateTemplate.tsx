@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
-import styles from '../Styles/styles';
 
-export function HomePage() {
+export function CreateTemplatePage() {
     return (
-        <View style={styles.container}> 
-            <Text> This is the Home Page </Text>
+        <View> 
+            <Text> This is the Create Template Page </Text>
         </View>
     )
 }
