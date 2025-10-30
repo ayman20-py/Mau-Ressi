@@ -4,10 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to Mau Ressi mobile app 
-      Basically, its an app that will help you create a digital receipt and send it to the customer 
-      directly maybe via email or using the "share" feature to either send it on whatsapp, or on any other platform 
-      </Text>
+      <Text>Hello my brother whats up</Text>
       <StatusBar style="auto" />
     </View>
   );
