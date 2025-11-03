@@ -1,5 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions} from "react-native";
 import { useFonts, Urbanist_400Regular, Urbanist_600SemiBold, Urbanist_700Bold } from '@expo-google-fonts/urbanist';
+
+// Getting the size of the width and height of the screen
+// for better component rendering
+const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 // Function used to load the fonts in each files
 export function loadFonts() {
@@ -20,6 +25,7 @@ export const Colors = {
     TEAL: "#5dc4bbff",
     PrimaryFontColor: "#1E2E43",
     BackgroundColor: "#F9FAFB",
+    CoralRed: "#F65C51",
 
 }
 
@@ -32,11 +38,11 @@ export const Fonts = {
 }
 
 export default StyleSheet.create({
-    container: { 
+    mainContainer: { 
         flex: 1,
         backgroundColor: Colors.BackgroundColor, 
         fontFamily: Fonts.SEMIBOLD,
-        fontSize: 12
+        paddingTop: 10
     },
 
     header: {
@@ -47,6 +53,53 @@ export default StyleSheet.create({
     body: {
         fontFamily: Fonts.SEMIBOLD,
         fontSize: 16
+    },
+
+    button: {
+        flex: 1,
+        backgroundColor: Colors.CoralRed,
+        width: width * 0.6,
+        height: 70,
+
+        marginBottom: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        
+        borderRadius: 20
+    },
+
+    buttonText: {
+        fontFamily: Fonts.BOLD,
+        fontSize: 20,
+        color: 'white',
+    },
+
+    container: {
+        backgroundColor: Colors.BackgroundColor,
+
+        flex: 1,
+        alignItems: 'center',
+    },
+
+    scrollViewProps: {
+        flex: 1,
+    },
+
+    customerCard: {
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        width: width * 0.9,
+        height: 110,
+
+        marginBottom: 10,
+
+        backgroundColor: Colors.BackgroundColor,
+        borderRadius: 22,
+        borderWidth: 0.5,
+
+        borderStyle: 'solid',
+        borderColor: Colors.PrimaryFontColor
     }
 
 })
