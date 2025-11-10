@@ -42,11 +42,13 @@ export default StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.BackgroundColor, 
         fontFamily: Fonts.SEMIBOLD,
-        paddingTop: 10
+        paddingTop: 0,
+        alignItems: 'center',
+        marginBottom: 20
     },
 
     header: {
-        backgroundColor: Colors.HeaderBackgroundColor,
+        backgroundColor: Colors.BackgroundColor,
         fontFamily: Fonts.BOLD,
     },
 
@@ -61,7 +63,7 @@ export default StyleSheet.create({
         width: width * 0.6,
         height: 70,
 
-        marginBottom: 30,
+        marginBottom: 15,
         justifyContent: 'center',
         alignItems: 'center',
         
@@ -83,6 +85,9 @@ export default StyleSheet.create({
 
     scrollViewProps: {
         flex: 1,
+        backgroundColor: Colors.BackgroundColor, 
+        fontFamily: Fonts.SEMIBOLD,
+        paddingTop: 20,
     },
 
     customerCard: {

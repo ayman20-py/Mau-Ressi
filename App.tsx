@@ -20,6 +20,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'; // Active Page User
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
+import { SQLiteProvider } from 'expo-sqlite';
+
 const Stack = createNativeStackNavigator(); // Creating the stack navigator variable 
 const Tab = createBottomTabNavigator(); // Creating the tab navigator variable
 
@@ -176,8 +178,10 @@ function RootTabs() {
 // stacks and bottom tab navigation and screens.
 export default function App() {
   return (
-    <NavigationContainer>
-     <RootStack />
-    </NavigationContainer>
+    <SQLiteProvider databaseName="MauRessiDB.db">
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </SQLiteProvider>
   );
 }
