@@ -178,7 +178,25 @@ function RootTabs() {
 // stacks and bottom tab navigation and screens.
 export default function App() {
   return (
-    <SQLiteProvider databaseName="MauRessiDB.db">
+    <SQLiteProvider 
+      databaseName="MauRessiDB.db"
+      onInit={async (db) => {
+        await db.execAsync(
+          `
+          CREATE TABLE IF NOT EXISTS Customers (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            phone TEXT,
+            address TEXT,
+            email TEXT
+          );
+          PRAGMA journal_mode=WAL;
+          `
+        )
+      }}
+
+      options={{useNewConnection: false}}
+    >
       <NavigationContainer>
         <RootStack />
       </NavigationContainer>

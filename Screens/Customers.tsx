@@ -14,7 +14,7 @@ import { useSQLiteContext } from 'expo-sqlite';
 export function CustomerPage() {
     const fontsLoaded = loadFonts();
 
-    const [ready, setReady] = React.useState(false);
+    const [ready, setReady] = React.useState(true);
 
 
     if (!fontsLoaded || !ready) return null;
@@ -25,38 +25,44 @@ export function CustomerPage() {
                 <PlusButton />
                 <View style={styles.mainContainer}>
                     <CustomerCard 
+                        id={"C0001"}
                         name={"Ayman Cassim"}
-                        phoneNumber={"+230 59899203"}
+                        phone={"+230 59899203"}
                         address={"Beau Bassin"}
                         email={"ayman@gmail.com"}
                     />
                     <CustomerCard 
+                        id={"C0002"}
                         name={"Rayyaa Elahee"}
-                        phoneNumber={"+230 57682966"}
+                        phone={"+230 57682966"}
                         address={"Beau Bassin"}
                         email={"rayyaa@gmail.com"}
                     />
                     <CustomerCard 
+                        id={"C0003"}
                         name={"Noor Jumoorty"}
-                        phoneNumber={"+230 59386926"}
+                        phone={"+230 59386926"}
                         address={"Phoenix"}
                         email={"noor@gmail.com"}
                     />
                     <CustomerCard 
+                        id={"C0004"}
                         name={"Adriana Kanasava"}
-                        phoneNumber={"+230 52768395"}
+                        phone={"+230 52768395"}
                         address={"Beau Bassin"}
                         email={"adriana@gmail.com"}
                     />
                     <CustomerCard 
+                        id={"C0005"}
                         name={"Ahmed Mutahar"}
-                        phoneNumber={"+230 58636962"}
+                        phone={"+230 58636962"}
                         address={"Yemen"}
                         email={"ahmed@gmail.com"}
                     />
                     <CustomerCard 
+                        id={"C0006"}
                         name={"Hasan Bamadhaf"}
-                        phoneNumber={"+230 59266501"}
+                        phone={"+230 59266501"}
                         address={"Yemen"}
                         email={"hasan@gmail.com"}
                     />

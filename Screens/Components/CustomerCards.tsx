@@ -2,37 +2,27 @@ import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableWithoutFeedba
 
 import styles from "../../Styles/styles";
 import { loadFonts } from "../../Styles/styles";
-import { useEffect } from "react";
-import { setupDatabase } from "../../Database/databaseSetup";
 
+import { getCustomers, addNewCustomer, LastUsedIdsManipulation } from "../../Database/databaseSetup";
+import { CustomerInterface } from '../../LogicControllers/CustomerClass';
+import { Customer } from "../../LogicControllers/CustomerClass";
 
-// To avoid errors for passing parameters in the 
-// component CustomerCard, this interface is used
-// otherwise the compiler requires the need to 
-// explicitly state the type of the parameters
-// which is only possible through the interface
-interface CustomerInformationProps {
-    name: string,
-    phoneNumber: string,
-    address: string,
-    email: string
-}
-
-export function CustomerCard({name, phoneNumber, address, email}: CustomerInformationProps) {
-
+export function CustomerCard({name, phone, address, email}: CustomerInterface) {
+    // Loading the fonts in the screen
     const fontsLoaded = loadFonts();
-    if (!fontsLoaded) return null;
+    if (!fontsLoaded) { return null;}
 
     return (
         <View style={styles.customerCard}>
-            <TouchableWithoutFeedback onPress= {() => {setupDatabase()}}>
+            <TouchableOpacity onPress={async () => {
+            }}>
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={styles.body}>{name}</Text>
-                    <Text style={styles.body}>{phoneNumber}</Text>
+                    <Text style={styles.body}>{phone}</Text>
                     <Text style={styles.body}>{address}</Text>
                     <Text style={styles.body}>{email}</Text>
                 </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
 
         </View>
     )
