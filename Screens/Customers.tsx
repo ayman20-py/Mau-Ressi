@@ -1,70 +1,73 @@
 
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '../Styles/styles';
-import { Colors, Fonts, loadFonts } from '../Styles/styles';
+import { useAppFonts } from '../Styles/styles';
 
 import { PlusButton } from './Components/PlusButton';
 import { CustomerCard } from './Components/CustomerCards';
 
-import { useSQLiteContext } from 'expo-sqlite';
+import { CustomerManipulation } from '../Database/databaseSetup';
+import { FlatList } from 'react-native-gesture-handler';
+
+import { Customer } from '../LogicControllers/CustomerClass';
 
 export function CustomerPage() {
-    const fontsLoaded = loadFonts();
 
-    const [ready, setReady] = React.useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [allCustomers, setAllCustomers] = useState<Customer[]>([]);
 
 
-    if (!fontsLoaded || !ready) return null;
+    const fontsLoaded = useAppFonts();
+
+    // Rendering all of the customers from the allCustomers list to the flat list
+    const renderCustomerCards = ({item}: {item: Customer}) => {
+        return (
+            <CustomerCard
+                id={item.getId()}
+                name={item.getName()}
+                phone={item.getPhone()}
+                address={item.getAddress()}
+                email={item.getEmail()}
+            />
+        )
+
+    }
+
+    useEffect(() => {
+        // Fetching all of the customers from the database &
+        // Creating an object Customer for each customer &
+        // storing them in the allCustomers list
+        async function fetchCustomers() {
+
+            let customersList = await CustomerManipulation.getCustomers();
+            let bufferCustomerList: Customer[] = [];
+            customersList = Object.values(customersList); // Converting from JSON to an array
+            for (let index = 0; index < customersList.length; index++) {
+                const currentCustomer = customersList[index];
+                const customerData = new Customer(currentCustomer.id, currentCustomer.name, currentCustomer.phone, currentCustomer.address, currentCustomer.email);
+                bufferCustomerList.push(customerData);
+            }
+            setAllCustomers(bufferCustomerList);
+            setIsLoading(false);
+
+        }
+
+        fetchCustomers();
+    }, [isLoading]);
+
 
     return (
         <ScrollView style={styles.scrollViewProps}> 
             <View style={styles.container}> 
                 <PlusButton />
                 <View style={styles.mainContainer}>
-                    <CustomerCard 
-                        id={"C0001"}
-                        name={"Ayman Cassim"}
-                        phone={"+230 59899203"}
-                        address={"Beau Bassin"}
-                        email={"ayman@gmail.com"}
-                    />
-                    <CustomerCard 
-                        id={"C0002"}
-                        name={"Rayyaa Elahee"}
-                        phone={"+230 57682966"}
-                        address={"Beau Bassin"}
-                        email={"rayyaa@gmail.com"}
-                    />
-                    <CustomerCard 
-                        id={"C0003"}
-                        name={"Noor Jumoorty"}
-                        phone={"+230 59386926"}
-                        address={"Phoenix"}
-                        email={"noor@gmail.com"}
-                    />
-                    <CustomerCard 
-                        id={"C0004"}
-                        name={"Adriana Kanasava"}
-                        phone={"+230 52768395"}
-                        address={"Beau Bassin"}
-                        email={"adriana@gmail.com"}
-                    />
-                    <CustomerCard 
-                        id={"C0005"}
-                        name={"Ahmed Mutahar"}
-                        phone={"+230 58636962"}
-                        address={"Yemen"}
-                        email={"ahmed@gmail.com"}
-                    />
-                    <CustomerCard 
-                        id={"C0006"}
-                        name={"Hasan Bamadhaf"}
-                        phone={"+230 59266501"}
-                        address={"Yemen"}
-                        email={"hasan@gmail.com"}
+                    <FlatList
+                        data={allCustomers}
+                        renderItem={renderCustomerCards}
+                        scrollEnabled={false} // To prevent the conflict between FlatList & ScrollView
                     />
                 </View>
             </View>

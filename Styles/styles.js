@@ -7,7 +7,7 @@ const { width } = Dimensions.get('window');
 const { height } = Dimensions.get('window');
 
 // Function used to load the fonts in each files
-export function loadFonts() {
+export function useAppFonts() {
     const [fontsLoaded] = useFonts ({
         Urbanist_400Regular,
         Urbanist_600SemiBold,
@@ -47,6 +47,16 @@ export default StyleSheet.create({
         marginBottom: 20
     },
 
+    newCustomerButtonContainer: {
+        flex: 1,
+        backgroundColor: Colors.BackgroundColor, 
+        fontFamily: Fonts.SEMIBOLD,
+        paddingTop: 0,
+        alignItems: 'center',
+        marginBottom: 10
+
+    },
+
     header: {
         backgroundColor: Colors.BackgroundColor,
         fontFamily: Fonts.BOLD,
@@ -78,7 +88,6 @@ export default StyleSheet.create({
 
     container: {
         backgroundColor: Colors.BackgroundColor,
-
         flex: 1,
         alignItems: 'center',
     },

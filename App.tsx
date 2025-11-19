@@ -12,7 +12,9 @@ import { SettingsPage } from './Screens/Settings';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import styles, { Fonts } from './Styles/styles';
-import { Colors, loadFonts } from './Styles/styles';
+import { Colors, useAppFonts } from './Styles/styles';
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 import Octicons from '@expo/vector-icons/Octicons';
@@ -29,7 +31,7 @@ const Tab = createBottomTabNavigator(); // Creating the tab navigator variable
 // going back and forth between screens using the stack system principle.
 function RootStack() {
   
-  const fontsLoaded = loadFonts();
+  const fontsLoaded = useAppFonts();
 
   if (!fontsLoaded) return null;
 
@@ -178,28 +180,10 @@ function RootTabs() {
 // stacks and bottom tab navigation and screens.
 export default function App() {
   return (
-    <SQLiteProvider 
-      databaseName="MauRessiDB.db"
-      onInit={async (db) => {
-        await db.execAsync(
-          `
-          CREATE TABLE IF NOT EXISTS Customers (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            phone TEXT,
-            address TEXT,
-            email TEXT
-          );
-          PRAGMA journal_mode=WAL;
-          `
-        )
-      }}
-
-      options={{useNewConnection: false}}
-    >
-      <NavigationContainer>
-        <RootStack />
-      </NavigationContainer>
-    </SQLiteProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
+      </GestureHandlerRootView>
   );
 }

@@ -15,8 +15,21 @@ export class Customer {
     }
 
 
+    // Getters methods
     public getId(): string {
         return this.id;
+    }
+    public getName(): string {
+        return this.name;
+    }
+    public getEmail(): string {
+        return this.email;
+    }
+    public getPhone(): string {
+        return this.phone;
+    }
+    public getAddress(): string {
+        return this.address;
     }
 }
 

@@ -1,8 +1,8 @@
 import { Text, View, Dimensions, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Modal, TouchableHighlight } from 'react-native';
 import styles from '../../Styles/styles';
-import { loadFonts } from '../../Styles/styles';
+import { useAppFonts } from '../../Styles/styles';
 
-import { deleteCustomer } from '../../Database/databaseSetup';
+import { CustomerManipulation } from '../../Database/databaseSetup';
 import { Constants } from '../../LogicControllers/SystemConstants';
 
 
@@ -10,16 +10,15 @@ import { Constants } from '../../LogicControllers/SystemConstants';
 // customer & templates page that when pressed, will redirect the 
 // user to the page to creata a new customer/template
 export function PlusButton() {
-    const fontsLoaded = loadFonts();
+    const fontsLoaded = useAppFonts();
     if (!fontsLoaded) return null;
 
 
     return (
-        <View style={styles.mainContainer}> 
-            <View style={styles.container}>
+        <View style={styles.newCustomerButtonContainer}> 
+            <View style={styles.newCustomerButtonContainer}>
                 <TouchableOpacity style={styles.button} onPress={async () => {
-                    await deleteCustomer(Constants.CUSTOMERKEY);
-
+                    console.log("Pressed the Button");
                 }}>
                         <Text style={styles.buttonText}>+ New Customer</Text>
                 </TouchableOpacity> 

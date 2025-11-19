@@ -3,11 +3,11 @@ import * as React from 'react';
 import { useEffect } from 'react';
 
 import styles from '../Styles/styles';
-import { Colors, Fonts, loadFonts } from '../Styles/styles';
+import { useAppFonts } from '../Styles/styles';
 
 
 export async function HomePage() {
-    const fontsLoaded = loadFonts();
+    const fontsLoaded = useAppFonts();
     if (!fontsLoaded) return null;
 
 

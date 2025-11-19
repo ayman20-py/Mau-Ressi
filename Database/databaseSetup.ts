@@ -1,53 +1,56 @@
-// This file sets up the SQLite database and creates necessary tables.
-// Not yet functionable, work in progress
-// USE EXPO-SECURE-STORE & EXPO-FILE-SYSTEM
-
 import * as SecureStore from 'expo-secure-store';
-import * as FileSystem from 'expo-file-system';
 import { Customer } from '../LogicControllers/CustomerClass';
 import { Constants } from '../LogicControllers/SystemConstants';
 
-export async function addNewCustomer(value: Customer)  {
-    try
-    { 
-        await getCustomers().then(async res => {
-            console.log(res);
-            res[value.getId()] = value;
 
-            await SecureStore.setItemAsync(Constants.CUSTOMERKEY, JSON.stringify(res));
-            return true;
-        });
-    }
+// Respoonsible for manipulating the customer data in the database
+export class CustomerManipulation {
 
-    catch (error) {
-        console.log(error);
-        return false;
-    }
-}
+    public static async addNewCustomer(value: Customer)  {
+        try
+        { 
+            await this.getCustomers().then(async res => {
+                console.log(res);
+                res[value.getId()] = value;
 
-export async function getCustomers() {
-    try{ 
-        const result = await SecureStore.getItemAsync(Constants.CUSTOMERKEY);
-        if (result !== null) {
-            return JSON.parse(result);
+                await SecureStore.setItemAsync(Constants.CUSTOMERKEY, JSON.stringify(res));
+                return true;
+            });
         }
-        else {
+
+        catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    // Return a json object containing all of the customers
+    public static async getCustomers() {
+        try{ 
+            const result = await SecureStore.getItemAsync(Constants.CUSTOMERKEY);
+            if (result !== null) {
+                return JSON.parse(result);
+            }
+            else {
+                return {};
+            }
+        }
+        catch (error) {
             return {};
         }
     }
-    catch (error) {
-        return {};
-    }
-}
 
 
-export async function deleteCustomer(key: string) {
-    try {
-        await SecureStore.deleteItemAsync(key);
-        console.log("Deleted successfully");
-    }
-    catch (error) {
-        console.log(error);
+    // For testing purposes only, this function is used to delete all the customers' information in the database
+    public static async deleteCustomer(key: string) {
+        try {
+            await SecureStore.deleteItemAsync(key);
+            console.log("Deleted successfully");
+        }
+        catch (error) {
+            console.log(error);
+        }
+
     }
 
 }
@@ -64,6 +67,7 @@ export async function addItem(key: string, value: string) { // For testing purpo
 
 }
 
+// Class is responsible for getting & updating the last used ids in order to get unique ones everytime.
 export class LastUsedIdsManipulation {
 
     public static async getCustomerId() {

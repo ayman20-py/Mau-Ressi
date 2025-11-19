@@ -2,11 +2,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 
 import styles from '../Styles/styles';
-import { Colors, Fonts, loadFonts } from '../Styles/styles';
+import {useAppFonts} from '../Styles/styles';
 
 export function SettingsPage() {
-    const fontsLoaded = loadFonts();
-    if (!fontsLoaded) return null;
+    const fontsLoaded = useAppFonts();
 
     return (
         <View style={styles.container}> 

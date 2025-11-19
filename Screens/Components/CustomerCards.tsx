@@ -1,16 +1,15 @@
 import { StyleSheet, Text, View, Modal, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 
 import styles from "../../Styles/styles";
-import { loadFonts } from "../../Styles/styles";
+import { useAppFonts } from "../../Styles/styles";
 
-import { getCustomers, addNewCustomer, LastUsedIdsManipulation } from "../../Database/databaseSetup";
+import { CustomerManipulation, LastUsedIdsManipulation } from "../../Database/databaseSetup";
 import { CustomerInterface } from '../../LogicControllers/CustomerClass';
 import { Customer } from "../../LogicControllers/CustomerClass";
 
-export function CustomerCard({name, phone, address, email}: CustomerInterface) {
+export function CustomerCard({id, name, phone, address, email}: CustomerInterface) {
     // Loading the fonts in the screen
-    const fontsLoaded = loadFonts();
-    if (!fontsLoaded) { return null;}
+    const fontsLoaded = useAppFonts();
 
     return (
         <View style={styles.customerCard}>
