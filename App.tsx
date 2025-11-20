@@ -57,11 +57,33 @@ function RootStack() {
       <Stack.Screen
         name={Screens.CREATETEMPLATEPAGE}
         component={CreateTemplatePage}
+        options={{
+          title: "Create Template",
+          headerStyle: {
+            backgroundColor: Colors.BackgroundColor,
+          },
+          headerTintColor: Colors.PrimaryFontColor,
+          headerTitleStyle: {
+            fontFamily: Fonts.BOLD,
+            fontSize: 20,
+          },
+        }}
       />
 
       <Stack.Screen 
         name={Screens.CREATECUSTOMERPAGE}
         component={CreateCustomerPage}
+        options={{
+          title: "Create Customer",
+          headerStyle: {
+            backgroundColor: Colors.BackgroundColor,
+          },
+          headerTintColor: Colors.PrimaryFontColor,
+          headerTitleStyle: {
+            fontFamily: Fonts.BOLD,
+            fontSize: 20,
+          },
+        }}
       /> 
 
 

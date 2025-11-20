@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions} from "react-native";
 import { useFonts, Urbanist_400Regular, Urbanist_600SemiBold, Urbanist_700Bold } from '@expo-google-fonts/urbanist';
+import { CreateTemplatePage } from "../Screens/CreateTemplatePage";
 
 // Getting the size of the width and height of the screen
 // for better component rendering
@@ -26,6 +27,7 @@ export const Colors = {
     PrimaryFontColor: "#1E2E43",
     BackgroundColor: "#F9FAFB",
     CoralRed: "#F65C51",
+    GreyColor: "#e4e4e4ff",
 
 }
 
@@ -114,6 +116,55 @@ export default StyleSheet.create({
 
         borderStyle: 'solid',
         borderColor: Colors.PrimaryFontColor
+    },
+
+    createTemplateMainContainer: {
+        backgroundColor: Colors.GreyColor,
+        flex: 1,
+
+    },
+
+    propertiesTab: {
+        flex: 0.7,
+        backgroundColor: Colors.BackgroundColor,
+        alignContent: 'center',
+        width: width,
+        height: 30,
+        
+        borderBottomRightRadius: 15,
+        borderBottomLeftRadius: 15,
+
+    },
+
+    createTemplateCanvas: {
+        flex: 4,
+        backgroundColor: Colors.GreyColor,
+        width: width,
+        height: 100,
+
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center'
+
+    },
+
+    elementSelector: {
+        flex: 0.7,
+        backgroundColor: Colors.BackgroundColor,
+        width: width,
+        height: 30,
+
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+
+    },
+
+    canvas: {
+        backgroundColor: "white",
+        margin: 30, 
+
+        height: 500,
+        width: 354,
     }
 
 })
