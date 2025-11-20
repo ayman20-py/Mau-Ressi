@@ -13,6 +13,7 @@ import { CustomerManipulation } from '../Database/databaseSetup';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { Customer } from '../LogicControllers/CustomerClass';
+import { Screens } from '../LogicControllers/SystemConstants';
 
 export function CustomerPage() {
 
@@ -62,7 +63,7 @@ export function CustomerPage() {
     return (
         <ScrollView style={styles.scrollViewProps}> 
             <View style={styles.container}> 
-                <PlusButton />
+                <PlusButton text="New Customer" routingScreen={Screens.CREATECUSTOMERPAGE}/>
                 <View style={styles.mainContainer}>
                     <FlatList
                         data={allCustomers}

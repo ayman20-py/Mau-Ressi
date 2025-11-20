@@ -3,3 +3,9 @@ export enum Constants {
     USERSETTINGS = "user_settings_key",
     LASTUSEDIDS = "last_used_ids_key",
 }
+
+
+export enum Screens {
+    CREATECUSTOMERPAGE = "CreateCustomerPage",
+    CREATETEMPLATEPAGE = "CreateTemplatePage"
+}

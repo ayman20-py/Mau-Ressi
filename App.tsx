@@ -4,10 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { HomePage } from './Screens/HomePage';
-import { CreateTemplatePage } from './Screens/CreateTemplate';
+import { TemplatePage } from './Screens/Template';
 import { CustomerPage } from './Screens/Customers';
 import { InvoicesPage } from './Screens/Invoices';
 import { SettingsPage } from './Screens/Settings';
+import { CreateTemplatePage } from './Screens/CreateTemplatePage';
+import { CreateCustomerPage } from './Screens/CreateCustomerPage';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -22,7 +24,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome'; // Active Page User
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
-import { SQLiteProvider } from 'expo-sqlite';
+import { Screens } from './LogicControllers/SystemConstants';
 
 const Stack = createNativeStackNavigator(); // Creating the stack navigator variable 
 const Tab = createBottomTabNavigator(); // Creating the tab navigator variable
@@ -45,6 +47,24 @@ function RootStack() {
           headerShown: false,
         }}
       />
+
+
+      <Stack.Screen 
+        name="TemplatesPage"
+        component={TemplatePage}
+      />
+
+      <Stack.Screen
+        name={Screens.CREATETEMPLATEPAGE}
+        component={CreateTemplatePage}
+      />
+
+      <Stack.Screen 
+        name={Screens.CREATECUSTOMERPAGE}
+        component={CreateCustomerPage}
+      /> 
+
+
     </Stack.Navigator>
   )
 }
@@ -104,7 +124,7 @@ function RootTabs() {
        {/* Create Template Page setup & options */}
       <Tab.Screen 
         name="TemplatesPage" 
-        component={CreateTemplatePage} 
+        component={TemplatePage} 
         options={{
           title: "Templates",
           headerStyle: {

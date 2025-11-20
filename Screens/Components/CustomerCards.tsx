@@ -14,6 +14,7 @@ export function CustomerCard({id, name, phone, address, email}: CustomerInterfac
     return (
         <View style={styles.customerCard}>
             <TouchableOpacity onPress={async () => {
+                console.log("Pressed Customer card of: ", name);
             }}>
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={styles.body}>{name}</Text>
