@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import * as React from 'react';
 import { useEffect } from 'react';
 
@@ -8,7 +8,14 @@ import { useAppFonts } from '../Styles/styles';
 
 export async function HomePage() {
     const fontsLoaded = useAppFonts();
-    if (!fontsLoaded) return null;
+    if (!fontsLoaded) {
+        return (
+            <View style={[styles.createTemplateMainContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+                <ActivityIndicator size="large" color="#0000ff" />
+                <Text>Loading fonts...</Text>
+            </View>
+        );
+    }
 
 
     return (

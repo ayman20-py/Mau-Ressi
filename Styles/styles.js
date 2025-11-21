@@ -125,7 +125,7 @@ export default StyleSheet.create({
     },
 
     propertiesTab: {
-        flex: 0.7,
+        flex: 0.5,
         backgroundColor: Colors.BackgroundColor,
         alignContent: 'center',
         width: width,
@@ -157,14 +157,41 @@ export default StyleSheet.create({
         borderTopRightRadius: 15,
         borderTopLeftRadius: 15,
 
+
     },
 
     canvas: {
         backgroundColor: "white",
         margin: 30, 
 
+        borderWidth: 0.2,
+
         height: 500,
         width: 354,
+    },
+
+    elementItem: {
+        flex: 1, 
+
+        borderWidth: 0.2,
+        borderRadius: 20,
+
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        width: 120,
+        marginTop: 25,
+        marginBottom: 25,
+
+        marginLeft: 5,
+        marginRight: 5,
+
+    },
+
+    elementItemFont: {
+
+        fontFamily: Fonts.SEMIBOLD,
+        fontSize: 13
     }
 
 })
