@@ -13,12 +13,6 @@ export interface BaseElement {
 // Text element specific properties
 export interface TextElement extends BaseElement {
     type: "text";
-    content: string;
-    style: {
-        fontSize: number;
-        fontWeight: 'normal' | 'bold';
-        color?: string;
-    };
 }
 
 // Text input element specific properties

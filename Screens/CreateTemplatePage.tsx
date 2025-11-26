@@ -4,6 +4,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import styles, { useAppFonts} from '../Styles/styles';
 
 import { ElementSelectorTab } from './Components/ElementSelecterTab';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 export function CreateTemplatePage() {
     const loadFonts = useAppFonts();
@@ -15,6 +16,18 @@ export function CreateTemplatePage() {
             </View>
         );
     }
+
+
+
+    // Just a regular press
+    const longPress = Gesture.LongPress()
+        .onStart(() => {
+            console.log("Moving the element");
+        })
+        .onEnd(() => {
+            console.log("Ending the draggin of the element");
+        });
+
     return (
         <View style={styles.createTemplateMainContainer}>
 
@@ -23,16 +36,21 @@ export function CreateTemplatePage() {
                 <Text style={styles.body}>Element Properties Tab</Text>
             </View>
 
-            {/* Contains the template canvas */}
-            <View style={styles.createTemplateCanvas}>
-                <View style={styles.canvas}>
-                    <Text style={styles.body}>A4 sheet of paper</Text>
+
+            <GestureDetector gesture={longPress}>
+                {/* Contains the template canvas */}
+                <View style={{flex: 4}}>
+                    <View style={styles.createTemplateCanvas}>
+                        <View style={styles.canvas}>
+                            <Text style={styles.body}>A4 sheet of paper</Text>
+                        </View>
+
+                    </View>
+
+                    {/* Contains the bottom element selector tab*/}
+                    <ElementSelectorTab />
                 </View>
-
-            </View>
-
-            {/* Contains the bottom element selector tab*/}
-            <ElementSelectorTab />
+            </GestureDetector>
 
         </View>
     )

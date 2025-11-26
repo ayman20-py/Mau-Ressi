@@ -7,6 +7,7 @@ import { DraggableElement } from './DragableElement';
 
 import Animated, { useSharedValue, withSpring, useAnimatedStyle } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { TextElement } from '../../LogicControllers/TemplateElements';
 
 
 export function ElementSelectorTab() {
@@ -19,35 +20,32 @@ export function ElementSelectorTab() {
                 horizontal={true}
                 showsHorizontalScrollIndicator={true}
             >
-                <TextElementView />
-                <TextElementView />
+                <TextElementView id="T001" type="text" x={0} y={0} width={0} height={0}/>
+                <TextElementView id="T002" type="text" x={0} y={0} width={0} height={0}/>
             </ScrollView>
         </View>
     )
 }
 
 
-function TextElementView() {
+function TextElementView({id, x, y, width, height}: TextElement) {
 
-    const holdDuration = 200;
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
 
+    // For the sake of having a press function
+    const longPress = Gesture.LongPress();
 
-
-    const longPress = Gesture.LongPress()
-        .minDuration(holdDuration) // 500 ms to hold the item to drag it.
-        .onStart(() => {
-            console.log("Posistion X:", translateX.value)
-        })
-        .onEnd(() => {
-            console.log("Ending the draggin of the element");
-        });
-
+    // Dragging function
     const drag = Gesture.Pan().onChange(event =>  {
         translateX.value += event.changeX;
         translateY.value += event.changeY;
-    });
+    })
+    .onEnd(() => {
+        translateX.value = 0; // Making every component going back to their original place in the ElementSelectorTab
+        translateY.value = 0;
+    })
+    ;
 
     const containerStyle = useAnimatedStyle(() => {
         return {
