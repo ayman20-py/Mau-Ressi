@@ -13,20 +13,27 @@ export interface BaseElement {
 // Text element specific properties
 export interface TextElement extends BaseElement {
     type: "text";
+    text: string;
 }
 
 // Text input element specific properties
 export interface TextInputElement extends BaseElement {
     type: "textInput";
     placeholder: string;
-    style:{ 
+    style: {
         fontSize: number;
         color?: string;
     }
 }
 
+export interface CheckboxElement extends BaseElement {
+    type: "checkbox";
+    checked: boolean;
+    label: string;
+}
+
 // Union type for all possinle elements
-export type TemplateElement = TextElement | TextInputElement;
+export type TemplateElement = TextElement | TextInputElement | CheckboxElement;
 
 export interface TemplateSize {
     width: number;
@@ -40,4 +47,8 @@ export const isTextElement = (element: TemplateElement): element is TextElement 
 
 export const isTextInputElement = (element: TemplateElement): element is TextInputElement => {
     return element.type === "textInput";
+}
+
+export const isCheckboxElement = (element: TemplateElement): element is CheckboxElement => {
+    return element.type === "checkbox";
 }

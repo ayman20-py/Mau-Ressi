@@ -20,18 +20,23 @@ export function ElementSelectorTab() {
                 horizontal={true}
                 showsHorizontalScrollIndicator={true}
             >
-                <TextElementView id="T001" type="text" x={0} y={0} width={0} height={0}/>
-                <TextElementView id="T002" type="text" x={0} y={0} width={0} height={0}/>
+                <TextElementView id="T001" type="text" text="Testing Text 1" x={0} y={0} width={0} height={0}/>
+                <TextElementView id="T002" type="text" text="Testing Text 2" x={0} y={0} width={0} height={0}/>
             </ScrollView>
         </View>
     )
 }
 
 
-function TextElementView({id, x, y, width, height}: TextElement) {
+function TextElementView({id, text, x, y, width, height}: TextElement) {
 
+    // Translated value of the axis.
     const translateX = useSharedValue(0);
     const translateY = useSharedValue(0);
+
+    // Absolute axis where the element is on.
+    const absoluteX = useSharedValue(0);
+    const absoluteY = useSharedValue(0);
 
     // For the sake of having a press function
     const longPress = Gesture.LongPress();
@@ -40,8 +45,12 @@ function TextElementView({id, x, y, width, height}: TextElement) {
     const drag = Gesture.Pan().onChange(event =>  {
         translateX.value += event.changeX;
         translateY.value += event.changeY;
+        absoluteX.value = event.absoluteX;
+        absoluteY.value = event.absoluteY;
     })
     .onEnd(() => {
+        console.log("Final X:", absoluteX.value, " Final Y:", absoluteY.value);
+        
         translateX.value = 0; // Making every component going back to their original place in the ElementSelectorTab
         translateY.value = 0;
     })
@@ -61,7 +70,7 @@ function TextElementView({id, x, y, width, height}: TextElement) {
             <Animated.View style={[containerStyle]}>
                 <GestureDetector gesture={drag}>
                     <TouchableOpacity style={styles.elementItem}>
-                        <Text style={styles.elementItemFont}>Testing Text...</Text>
+                        <Text style={styles.elementItemFont}>{text}</Text>
                     </TouchableOpacity>
                 </GestureDetector>
             </Animated.View>
