@@ -27,6 +27,34 @@ export function ElementSelectorTab() {
     )
 }
 
+function ShadowTextElement({ id, text, x, y, width, height }: TextElement) {
+
+    const translateX = useSharedValue(0);
+    const translateY = useSharedValue(0);
+
+    // Absolute axis where the element is on.
+    const absoluteX = useSharedValue(0);
+    const absoluteY = useSharedValue(0);
+    const drag = Gesture.Pan().onChange(event =>  {
+        translateX.value += event.changeX;
+        translateY.value += event.changeY;
+        absoluteX.value = event.absoluteX;
+        absoluteY.value = event.absoluteY;
+    })
+    .onEnd(() => {
+        console.log("Final X:", absoluteX.value, " Final Y:", absoluteY.value);
+        
+        translateX.value = 0; // Making every component going back to their original place in the ElementSelectorTab
+        translateY.value = 0;
+    });
+    
+    return (
+
+        <GestureDetector gesture={drag}>
+            <Text style={styles.body}>Dragging the Text</Text>
+        </GestureDetector>
+    )
+}
 
 function TextElementView({id, text, x, y, width, height}: TextElement) {
 
@@ -45,6 +73,7 @@ function TextElementView({id, text, x, y, width, height}: TextElement) {
     const drag = Gesture.Pan().onChange(event =>  {
         translateX.value += event.changeX;
         translateY.value += event.changeY;
+
         absoluteX.value = event.absoluteX;
         absoluteY.value = event.absoluteY;
     })
