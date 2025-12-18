@@ -3,7 +3,6 @@ import { View, Text, ActivityIndicator } from 'react-native';
 
 import styles, { useAppFonts} from '../Styles/styles';
 
-import { ElementSelectorTab } from './Components/ElementSelecterTab';
 
 export function CreateTemplatePage() {
     const loadFonts = useAppFonts();
@@ -39,7 +38,6 @@ export function CreateTemplatePage() {
                     </View>
 
                     {/* Contains the bottom element selector tab*/}
-                    <ElementSelectorTab />
                 </View>
 
         </View>
